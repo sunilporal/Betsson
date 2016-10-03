@@ -26,15 +26,18 @@ object UserLoginEvents {
     val sc = new SparkContext(sparkConf)
     
     val ssc = new StreamingContext(sc, Seconds(5))
+    
     val kafkaParams = Map("metadata.broker.list" -> "localhost:9092")
     
     val topics = Set("CustomerLogins")
+    
     val sqlContext = new SQLContext(sc)
     
- //   ssc.checkpoint("/home/sac/work/KafkaCheckPoint/")
+    ssc.checkpoint("/home/sac/work/KafkaCheckPoint")    // define checkpoint directory
     
     val stream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topics).map(_._2)
- //   stream.checkpoint(Seconds(2 * 5))
+    
+    stream.checkpoint(Seconds(2 * 5))      // Checkpoint interval
     
     val accumulator = getInstance(sc)
     
