@@ -27,7 +27,7 @@ object FailedEventPublish extends Serializable {
     
     println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4"+value+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44")
     
-    producer.send(new ProducerRecord("ConsumerTopic","{\"CustomerId\":\""+value+"\",\"EventName\":\"Failed3ConsecutiveLogins\",\"Timestamp\":\"2016‐05‐31T09:06:33.303\",}"))
+    producer.send(new ProducerRecord("ConsumerTopic","{\"CustomerId\":\""+value+"\",\"EventName\":\"Failed3ConsecutiveLogins\",\"Timestamp\":\""+System.currentTimeMillis+"\",}"))
   }
 }
 
